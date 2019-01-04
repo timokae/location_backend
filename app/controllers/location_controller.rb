@@ -1,7 +1,7 @@
 class LocationController < ApplicationController
   skip_before_action :verify_authenticity_token
-  
-  def index 
+
+  def index
     @locations = Location.all
   end
 
@@ -16,6 +16,20 @@ class LocationController < ApplicationController
         error: @location.errors.full_messages[0]
       }
     end
+  end
+
+  def count_by_name
+    @name = params[:name]
+    @count = Location.where(name: @name).count
+
+    render json: { name: @name, count: @count }
+  end
+
+  def locations_by_name
+    @name = params[:name]
+    @locations = Location.where(name: @name)
+
+    render json: { locations: @locations }
   end
 
   private

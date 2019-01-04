@@ -3,4 +3,6 @@ Rails.application.routes.draw do
 
   post 'api/locations/create', to: 'location#create'
   get 'locations', to: 'location#index'
+  get 'api/locations/count_by_name/:name', to: 'location#count_by_name'
+  get 'api/locations/locations_by_name/:name', to: 'location#locations_by_name'
 end
