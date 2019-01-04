@@ -1,0 +1,19 @@
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Longitude</th>
+        <th>Latitude</th>
+        <th>Measured At</th>
+        <th>Strategy</th>
+    </tr>
+
+    <% @locations.each do |location| %>
+        <tr>
+            <td><%= location.name %></td>
+            <td><%= location.longitude %></td>
+            <td><%= location.latitude %></td>
+            <td><%= location.measured_at %></td>
+            <td><%= location.strategy %></td>
+        </tr>
+    <% end %>
+</table>
