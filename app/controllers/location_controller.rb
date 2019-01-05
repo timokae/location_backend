@@ -27,7 +27,8 @@ class LocationController < ApplicationController
 
   def locations_by_name
     @name = params[:name]
-    @locations = Location.where(name: @name)
+    @locations = Location.where(name: @name).order(measured_at: :desc)
+
 
     render json: { locations: @locations }
   end
