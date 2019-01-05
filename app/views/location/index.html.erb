@@ -12,7 +12,7 @@
             <td><%= location.name %></td>
             <td><%= location.longitude %></td>
             <td><%= location.latitude %></td>
-            <td><%= location.measured_at %></td>
+            <td><%= Time.at(location.measured_at / 1000) %></td>
             <td><%= location.strategy %></td>
         </tr>
     <% end %>
