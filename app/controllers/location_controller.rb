@@ -2,7 +2,7 @@ class LocationController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @locations = Location.all
+    @locations = Location.all.order(measured_at: :desc)
   end
 
   def create
