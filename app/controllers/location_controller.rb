@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 class LocationController < ApplicationController
   skip_before_action :verify_authenticity_token
 
@@ -31,7 +33,26 @@ class LocationController < ApplicationController
     @locations = Location.where(name: @name).order(measured_at: :desc)
     @count = @locations.count
 
-    render 'locations_by_name'
+    respond_to do |format|
+      format.html { render 'locations_by_name' }
+      format.xml {
+        @locations = Location.where(name: @name).order(measured_at: :desc)
+        builder = Nokogiri::XML::Builder.new do |xml|
+          xml.root do
+            @locations.each do |location|
+              xml.Placemark do
+                xml.name location.name
+                xml.description location.strategy
+                xml.Point do
+                  xml.coordinates "#{location.longitude}, #{location.latitude}"
+                end
+              end
+            end
+          end
+        end
+        render xml: builder.to_xml
+      }
+    end
   end
 
   private
