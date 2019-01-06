@@ -35,23 +35,23 @@ class LocationController < ApplicationController
 
     respond_to do |format|
       format.html { render 'locations_by_name' }
-      format.xml {
+      format.xml do
         @locations = Location.where(name: @name).order(measured_at: :desc)
         builder = Nokogiri::XML::Builder.new do |xml|
-          xml.root do
+          xml.kml(xmlns: "http://www.opengis.net/kml/2.2") do
             @locations.each do |location|
               xml.Placemark do
                 xml.name location.name
                 xml.description location.strategy
                 xml.Point do
                   xml.coordinates "#{location.longitude}, #{location.latitude}"
-                end
-              end
-            end
-          end
-        end
+                end # point
+              end # placemark
+            end # @locations.each
+          end # kml
+        end # builder
         render xml: builder.to_xml
-      }
+      end # format.xml
     end
   end
 
