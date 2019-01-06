@@ -3,6 +3,7 @@ class LocationController < ApplicationController
 
   def index
     @locations = Location.all.order(measured_at: :desc)
+    @count = @locations.count
   end
 
   def create
