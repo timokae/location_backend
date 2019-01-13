@@ -1,24 +1,21 @@
-# README
+# Routes
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- `POST api/locations/create`
+  - List Create new database entry
+- `GET locations`, to: 'location#index'
+  - Get all entries from databse
+- `GET 'locations/locations_by_name/:name`
+  - Get all entries from database with name `:name`
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# JSON
+```
+{
+    "location": {
+        "latitude": 52.43434,
+        "longitude: 10.12323,
+        "measured_at": 45677,
+        "strategy": 0,
+        "name": "Test"
+	}
+}
+```
